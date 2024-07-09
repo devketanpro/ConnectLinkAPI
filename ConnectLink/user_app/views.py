@@ -1,11 +1,11 @@
 from rest_framework import generics, status
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from .models import User
+from user_app.models import User
 from user_app.serializers import UserSerializer, LoginSerializer
 
-from rest_framework.permissions import IsAuthenticated
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -36,10 +36,8 @@ class UserListView(generics.ListAPIView):
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
     def get_queryset(self):
-        # Get the logged-in user
         logged_in_user = self.request.user
 
-        # Exclude the logged-in user from the queryset
         queryset = User.objects.exclude(pk=logged_in_user.pk)
         
         return queryset
@@ -51,12 +49,5 @@ class UserDetailView(generics.RetrieveAPIView):
     queryset = User.objects.all()
 
     def get_object(self):
-        user_id = self.kwargs.get('pk')  # 'pk' is the default name for primary key in DRF
-        return User.objects.get(pk=user_id)
-    
-    
-    
-    
-    
-
-
+        user_id = self.kwargs.get('pk')
+        return User.objects.get(pk=user_id) 

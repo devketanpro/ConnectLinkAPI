@@ -21,6 +21,7 @@ class InterestCreateView(generics.CreateAPIView):
     def perform_create(self, serializer):
         serializer.save(sender=self.request.user)
 
+
 class ReceivedInterestListView(generics.ListAPIView):
     serializer_class = InterestSerializer
     permission_classes = [IsAuthenticated]

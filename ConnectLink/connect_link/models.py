@@ -12,4 +12,3 @@ class Interest(models.Model):
 
 class Chat(models.Model):
     participants = models.ManyToManyField(User)
-
