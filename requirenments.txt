@@ -19,3 +19,4 @@ typing_extensions==4.12.2
 urllib3==2.2.2
 djangorestframework
 djangorestframework-simplejwt
+django-cors-headers
